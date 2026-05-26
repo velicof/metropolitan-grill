@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --color-bg: #0F0F0F;
+  --color-card: #1A1A1A;
+  --color-primary: #F5C518;
+  --color-accent: #FFD84D;
+  --color-text: #F5F5F5;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-brand-darker text-brand-text;
+    font-family: var(--font-body);
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1A1A1A; }
+  ::-webkit-scrollbar-thumb { background: #444; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #F5C518; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-brand-yellow text-black font-bold
+           rounded-xl px-6 py-3.5
+           transition-all duration-200
+           hover:bg-brand-accent hover:scale-[1.02]
+           active:scale-[0.98]
+           focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:ring-offset-2 focus:ring-offset-brand-darker;
+  }
+
+  .hero-grain {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.04;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 8s steps(10) infinite;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+           bg-transparent text-brand-text font-semibold
+           border border-white/20 rounded-xl px-6 py-3.5
+           transition-all duration-200
+           hover:bg-white/10 hover:border-brand-yellow/40
+           active:scale-[0.98];
+  }
+
+  .btn-whatsapp {
+    @apply inline-flex items-center justify-center gap-2
+           bg-[#25D366] text-white font-semibold
+           rounded-xl px-6 py-3.5
+           transition-all duration-200
+           hover:bg-[#1da851] hover:scale-[1.02]
+           active:scale-[0.98];
+  }
+
+  .product-card {
+    @apply relative bg-brand-card rounded-2xl overflow-hidden
+           border border-white/5
+           transition-all duration-300
+           hover:border-brand-yellow/40 hover:shadow-lg hover:shadow-brand-yellow/10
+           hover:-translate-y-0.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-wide
+           px-2 py-0.5 rounded-full;
+  }
+
+  .badge-popular  { @apply bg-brand-yellow/20 text-brand-yellow border border-brand-yellow/30; }
+  .badge-spicy    { @apply bg-red-500/20 text-red-400 border border-red-500/30; }
+  .badge-vegetarian { @apply bg-green-500/20 text-green-400 border border-green-500/30; }
+  .badge-nou      { @apply bg-brand-accent/20 text-brand-accent border border-brand-accent/30; }
+  .badge-oferta   { @apply bg-purple-500/20 text-purple-400 border border-purple-500/30; }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold text-brand-text;
+  }
+
+  .gradient-line {
+    @apply h-0.5 bg-gradient-to-r from-brand-yellow via-brand-accent to-transparent rounded-full;
+  }
+
+  .input-field {
+    @apply w-full bg-brand-card border border-white/10 rounded-xl
+           px-4 py-3 text-brand-text placeholder-brand-muted
+           focus:outline-none focus:border-brand-yellow/50 focus:ring-1 focus:ring-brand-yellow/30
+           transition-colors;
+  }
+
+  .trust-badge {
+    @apply inline-flex items-center gap-2 text-xs font-medium
+           bg-brand-card border border-brand-yellow/20 text-brand-text/80
+           px-3 py-2 rounded-full;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-yellow to-brand-accent bg-clip-text text-transparent;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  30% { transform: translate(3%, -15%); }
+  50% { transform: translate(12%, 9%); }
+  70% { transform: translate(9%, 4%); }
+  90% { transform: translate(-1%, 7%); }
+}
+
+.safe-top    { padding-top:    env(safe-area-inset-top); }
+.safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
